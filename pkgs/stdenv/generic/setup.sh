@@ -509,8 +509,7 @@ concatStringsSep() {
 # so it is defined here but tried after the hook.
 _addRpathPrefix() {
     if [ "${NIX_NO_SELF_RPATH:-0}" != 1 ]; then
-        printf -v selfrpath "%q/lib" "$1"
-        export NIX_LDFLAGS="-rpath $selfrpath ${NIX_LDFLAGS-}"
+        export NIX_LDFLAGS=("-rpath" "$1/lib" "${NIX_LDFLAGS[@]}")
     fi
 }
 
